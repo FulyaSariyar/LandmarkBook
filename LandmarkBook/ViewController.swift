@@ -10,6 +10,8 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var landmarkNames = [String] ()
     var landmarkImages = [UIImage]()
+    var chosenLandmarkName = ""
+    var chosenLandmarkImage = UIImage()
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -36,7 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         landmarkImages.append(UIImage(named:"Tajmahal")!)
         
         //diziler sıralı çalışır bu yüzden iki diziyi aynı sırada ekledim.
-        
+        navigationItem.title = "Landmark Book"
         
     }
     
@@ -62,9 +64,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        chosenLandmarkName = landmarkNames[indexPath.row]
+        chosenLandmarkImage = landmarkImages[indexPath.row]
+        
         performSegue(withIdentifier: "toImageViewController", sender: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //segue olmadan önce yapılacak işlem
+        if segue.identifier == "toImageViewController"{
+            let destinationVC = segue.destination as! imageViewController //ImageViewControlleriçerisine eriştik.
+            destinationVC.selectedLandmarkName = chosenLandmarkName
+            destinationVC.selectedLandmarkImage = chosenLandmarkImage
+            
+            
+        }
+    }
     
 }
 
