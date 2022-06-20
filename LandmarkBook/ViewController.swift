@@ -8,7 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    var landmarkNames = [String] ()
+    var landmarkImages = [UIImage]()
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -16,16 +17,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self //seld = C# 'daki this anahtar kelimesi.
         tableView.dataSource = self
         
+        //LandMarkBook Data
         
        // UIImage(named: "stonehenge")
-        var landmarkNames = [String] () //dizi tanımladım
-        landmarkNames.append("colosseum")
-        landmarkNames.append("greatwall")
-        landmarkNames.append("kremlin")
-        landmarkNames.append("stonehenge")
+         //dizi tanımladım
+        landmarkNames.append("Colosseum")
+        landmarkNames.append("Geatwall")
+        landmarkNames.append("Kremlin")
+        landmarkNames.append("Sonehenge")
         landmarkNames.append("Tajmahal")
+         
         
-        var landmarkImages = [UIImage]() //UIImage dizisi tanımladım
+         //UIImage dizisi tanımladım // Assets klasörünün içerisindeki isimler ile aynı olmalıdır.
         landmarkImages.append(UIImage(named:"colosseum")!)
         landmarkImages.append(UIImage(named:"greatwall")!)
         landmarkImages.append(UIImage(named:"kremlin")!)
@@ -36,14 +39,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
     }
-    
+    //hücrelerde ne göstereceğiz.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = "test"
+        cell.textLabel?.text = landmarkNames[indexPath.row] //diziyi sıralı sekilde gösterir.
         return cell
     }
+    //hücrelerde göstereceğimiz şeyi kaç tane göstereceğiz.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return landmarkNames.count
     }
 }
 
